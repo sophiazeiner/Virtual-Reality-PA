@@ -353,7 +353,25 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Text Brief
+  m_text: " Pers\xF6nliche Beschwerde \u2013 Verhalten von Dr. Leo Feld   28.09.25\n\nSehr
+    geehrte Damen und Herren,\Lich wende mich mit diesem Schreiben an Sie, weil ich
+    mich in einer Situation befinde, die mich psychisch stark belastet. Es geht um
+    Herrn Dr. Leo Feld, bei dem ich seit mehreren Semestern Veranstaltungen besuche.\nSchon
+    seit einiger Zeit f\xFChle ich mich in seiner N\xE4he unwohl. Anfangs waren es
+    nur Blicke, die zu lange dauerten, Fragen, die pers\xF6nlicher wirkten, als sie
+    sein m\xFCssten. Ich habe das zun\xE4chst ignoriert, aus Unsicherheit oder vielleicht
+    auch aus Hoffnung, mich zu t\xE4uschen.\nVor wenigen Tagen kam es jedoch zu einer
+    Situation, die f\xFCr mich eine klare Grenze \xFCberschritten hat: Nach einer
+    Seminarsitzung bat er mich, noch kurz zu bleiben. Das Gespr\xE4ch war zun\xE4chst
+    harmlos, dann\u2026 versuchte er, mir n\xE4herzukommen. Er lehnte sich vor, ber\xFChrte
+    meinen Arm und \u2013 ich bin mir sicher \u2013 wollte mich k\xFCssen. Ich habe
+    mich zur\xFCckgezogen und bin gegangen.\nIch schreibe diesen Brief nicht aus
+    Wut, sondern aus Verzweiflung. Ich wei\xDF nicht, wie ich damit umgehen soll.
+    Ich f\xFChle mich hilflos, verletzt und zunehmend unsicher \u2013 auch in meinem
+    Studienalltag. Mein R\xFCckzug aus seinen Vorlesungen ist eine direkte Folge
+    dieser Erfahrung.\nIch bitte darum, diesen Vorgang vertraulich zu behandeln,
+    und hoffe sehr, dass er ernst genommen wird.\n\nMit freundlichen Gr\xFC\xDFen,\LLina
+    Berger"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -362,8 +380,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -380,8 +398,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7.1
-  m_fontSizeBase: 7.1
+  m_fontSize: 3.08
+  m_fontSizeBase: 3.08
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -1,14 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MikroskopInteraktion : MonoBehaviour
+public class MedikamentAnalyse : MonoBehaviour
 {
-    public GameObject analyseCanvas;
+    public GameObject infobox;
 
-    private bool canvasAktiv = false;
-
-    public void ToggleAnalyse()
+    private void OnTriggerEnter(Collider other)
     {
-        canvasAktiv = !canvasAktiv;
-        analyseCanvas.SetActive(canvasAktiv);
+        if (other.CompareTag("Medikament"))
+        {
+            infobox.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Medikament"))
+        {
+            infobox.SetActive(false);
+        }
     }
 }
