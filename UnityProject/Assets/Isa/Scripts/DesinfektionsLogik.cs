@@ -6,62 +6,72 @@ public class DesinfektionsLogik : MonoBehaviour
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip spruehSound;
+    public AudioClip abgestelltSound;
 
-    [Header("Rotation & Platzierung")]
-    public float kippWinkelThreshold = 60f;  // z. B. mind. 60° Kippung
-    public Transform abstellPosition;       // Referenz zur Zielposition
-    public float abstellToleranz = 0.2f;    // Wie genau die Flasche abgestellt sein muss
+    [Header("Abstellpunkt")]
+    public Transform abstellPosition;
+    public float abstellToleranz = 0.25f;
 
+    [Header("Kippwinkel-Erkennung")]
+    public float kippWinkelThreshold = 90f;
+    public float aufrechtWinkelLimit = 45f; // Für Tisch-Snapping
+
+    private Rigidbody rb;
     private XRGrabInteractable grabInteractable;
-    private bool wurdeGekippt = false;
-    private bool wurdeAbgestellt = false;
 
-    public static bool haendeDesinfiziert = false;
+    private bool wurdeGedreht = false;
+    private bool wurdeAbgestellt = false;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         grabInteractable = GetComponent<XRGrabInteractable>();
-
-        if (grabInteractable != null)
-        {
-            grabInteractable.selectExited.AddListener(OnLosgelassen);
-        }
-        else
-        {
-            Debug.LogWarning("XRGrabInteractable fehlt!");
-        }
     }
 
     void Update()
     {
-        if (grabInteractable.isSelected && !wurdeGekippt)
+        if (!wurdeGedreht)
         {
-            float kippung = Vector3.Angle(transform.up, Vector3.up);
-            if (kippung >= kippWinkelThreshold)
+            float kippwinkel = Vector3.Angle(transform.up, Vector3.up);
+            if (kippwinkel > kippWinkelThreshold)
             {
-                wurdeGekippt = true;
-                Debug.Log("Flasche wurde gekippt!");
-
-                if (audioSource != null && spruehSound != null)
+                wurdeGedreht = true;
+                if (spruehSound != null && audioSource != null)
                     audioSource.PlayOneShot(spruehSound);
+
+                Debug.Log("Flasche gekippt – Hände gelten als desinfiziert.");
             }
         }
-    }
 
-    void OnLosgelassen(SelectExitEventArgs args)
-    {
-        if (wurdeGekippt && !wurdeAbgestellt)
+        // Snapping erst NACH dem Drehen UND wenn sie wieder aufrecht UND nah am Tisch ist
+        if (wurdeGedreht && !wurdeAbgestellt)
         {
             float distanz = Vector3.Distance(transform.position, abstellPosition.position);
-            if (distanz <= abstellToleranz)
+            float winkelZurVertikalen = Vector3.Angle(transform.up, Vector3.up);
+
+            if (distanz <= abstellToleranz && winkelZurVertikalen <= aufrechtWinkelLimit)
             {
                 wurdeAbgestellt = true;
-                haendeDesinfiziert = true;
-                Debug.Log("✔ Hände erfolgreich desinfiziert!");
-            }
-            else
-            {
-                Debug.Log("Flasche nicht korrekt abgestellt.");
+
+                // Loslassen aus der Hand
+                if (grabInteractable.isSelected && grabInteractable.firstInteractorSelecting != null)
+                {
+                    grabInteractable.interactionManager.SelectExit(grabInteractable.firstInteractorSelecting, grabInteractable);
+                }
+
+                // Snappen
+                transform.position = abstellPosition.position;
+                transform.rotation = abstellPosition.rotation;
+
+                // Optional fixieren
+                grabInteractable.enabled = false;
+                rb.isKinematic = true;
+
+                // Ton abspielen
+                if (abgestelltSound != null && audioSource != null)
+                    audioSource.PlayOneShot(abgestelltSound);
+
+                Debug.Log("Flasche korrekt abgestellt.");
             }
         }
     }
