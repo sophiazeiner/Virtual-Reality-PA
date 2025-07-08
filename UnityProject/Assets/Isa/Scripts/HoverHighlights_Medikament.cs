@@ -4,15 +4,22 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class HoverHighlights_Medikament : MonoBehaviour
 {
     public Material highlightMaterial;
-    public Material defaultMaterial;
 
     private MeshRenderer[] meshRenderers;
     private XRGrabInteractable grabInteractable;
+    private Material[][] originalMaterials; // 2D-Array für mehrere Materialien pro Renderer
 
     private void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
+
+        // Originalmaterialien speichern
+        originalMaterials = new Material[meshRenderers.Length][];
+        for (int i = 0; i < meshRenderers.Length; i++)
+        {
+            originalMaterials[i] = meshRenderers[i].materials;
+        }
 
         if (grabInteractable != null)
         {
@@ -21,24 +28,28 @@ public class HoverHighlights_Medikament : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("XRGrabInteractable missing on: " + gameObject.name);
+            Debug.LogWarning("XRGrabInteractable fehlt an: " + gameObject.name);
         }
     }
 
     private void OnHoverEnter(HoverEnterEventArgs args)
     {
-        foreach (var renderer in meshRenderers)
+        for (int i = 0; i < meshRenderers.Length; i++)
         {
-            renderer.material = highlightMaterial;
+            Material[] highlightMats = new Material[meshRenderers[i].materials.Length];
+            for (int j = 0; j < highlightMats.Length; j++)
+            {
+                highlightMats[j] = highlightMaterial;
+            }
+            meshRenderers[i].materials = highlightMats;
         }
     }
 
     private void OnHoverExit(HoverExitEventArgs args)
     {
-        foreach (var renderer in meshRenderers)
+        for (int i = 0; i < meshRenderers.Length; i++)
         {
-            renderer.material = defaultMaterial;
+            meshRenderers[i].materials = originalMaterials[i];
         }
     }
 }
-
