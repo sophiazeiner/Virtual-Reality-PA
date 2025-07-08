@@ -72,6 +72,18 @@ public class DesinfektionsLogik : MonoBehaviour
                     audioSource.PlayOneShot(abgestelltSound);
 
                 Debug.Log("Flasche korrekt abgestellt.");
+
+                // 🟢 Alle restlichen Objekte interaktiv machen
+                VRIntroManager manager = FindObjectOfType<VRIntroManager>();
+                if (manager != null)
+                {
+                    manager.AktiviereInteraktiveObjekte();
+                    Debug.Log("Interaktive Objekte aktiviert.");
+                }
+                else
+                {
+                    Debug.LogWarning("VRIntroManager nicht gefunden.");
+                }
             }
         }
     }
