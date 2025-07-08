@@ -23464,8 +23464,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Aufgabe 3 - Untersuche die Scherbe\n\n1. Lege die Scherbe auf das Mikroskop.\n2.
     Beuge dich vorsichtig heran und blicke durch das Okular.\n\nTipp: Schlie\xDFe
-    dein linkes Auge, um das Bild im Mikroskop klar zu sehen ganz wie in der Realit\xE4t.\n\n3.
-    Lege die Scherbe anschlie\xDFend zur\xFCck auf ihren urspr\xFCnglichen Platz\n\n"
+    dein linkes Auge, um das Bild im Mikroskop klar zu sehen ganz wie in der Realit\xE4t.\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8ac1ed6123904112adeaf50e63c4731, type: 2}
   m_sharedMaterial: {fileID: 1693478669045529817, guid: c8ac1ed6123904112adeaf50e63c4731,
@@ -28023,7 +28022,6 @@ GameObject:
   - component: {fileID: 1042359019}
   - component: {fileID: 1042359018}
   - component: {fileID: 1042359017}
-  - component: {fileID: 1042359021}
   m_Layer: 0
   m_Name: Dr.Feld
   m_TagString: Untagged
@@ -28118,23 +28116,6 @@ Transform:
   - {fileID: 1959284685}
   m_Father: {fileID: 1150891794}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1042359021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1042359014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9380b7900004d374dadb53dc3186834c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeTillRespawn: 10
-  elapsedTime: 0
-  isResetting: 0
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &1046297925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33430,6 +33411,7 @@ PrefabInstance:
     - {fileID: 2677722946677726688, guid: a7d6331e60a77934fb613c77e770838b, type: 3}
     - {fileID: 8561162767225981271, guid: a7d6331e60a77934fb613c77e770838b, type: 3}
     - {fileID: -2606572771108885759, guid: a7d6331e60a77934fb613c77e770838b, type: 3}
+    - {fileID: -8844970418333309437, guid: a7d6331e60a77934fb613c77e770838b, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a7d6331e60a77934fb613c77e770838b,
         type: 3}
@@ -34485,23 +34467,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5089618, y: 0, z: 0.7072726}
   m_Center: {x: 0.00000011920929, y: -0.00000047683716, z: -0.00000013411045}
---- !u!114 &1307693783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307693774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9380b7900004d374dadb53dc3186834c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeTillRespawn: 10
-  elapsedTime: 0
-  isResetting: 0
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1309699830
 GameObject:
   m_ObjectHideFlags: 0
@@ -41654,10 +41619,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1307693780}
-    - targetCorrespondingSourceObject: {fileID: -1800661166098363206, guid: 68705af2bb647324082b54d01352369f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1307693783}
   m_SourcePrefab: {fileID: 100100000, guid: 68705af2bb647324082b54d01352369f, type: 3}
 --- !u!1 &1641331090
 GameObject:
