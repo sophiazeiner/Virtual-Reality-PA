@@ -9696,10 +9696,10 @@ MonoBehaviour:
   audioSource: {fileID: 414594001}
   spruehSound: {fileID: 8300000, guid: bed9ec9035b4b48e5830b8b1480f341a, type: 3}
   abgestelltSound: {fileID: 8300000, guid: 11d1578c573674d49be8e450efabb656, type: 3}
-  abstellPosition: {fileID: 207170407}
+  abstellPosition: {fileID: 1081730090}
   abstellToleranz: 0.2
   kippWinkelThreshold: 90
-  aufrechtWinkelLimit: 45
+  aufrechtWinkelLimit: 40
 --- !u!82 &414594001
 AudioSource:
   m_ObjectHideFlags: 0

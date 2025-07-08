@@ -13,8 +13,11 @@ public class DesinfektionsLogik : MonoBehaviour
     public float abstellToleranz = 0.25f;
 
     [Header("Kippwinkel-Erkennung")]
-    public float kippWinkelThreshold = 90f;
-    public float aufrechtWinkelLimit = 45f; // Für Tisch-Snapping
+    public float kippWinkelThreshold = 90f; // Ab wann gilt: gekippt
+    public float aufrechtWinkelLimit = 45f; // Für "steht wieder gerade"
+
+    [Header("Aufgaben-Manager")]
+    public AufgabenUIManager aufgabenManager; // Dein UI-Manager, der die nächste Aufgabe startet
 
     private Rigidbody rb;
     private XRGrabInteractable grabInteractable;
@@ -36,14 +39,14 @@ public class DesinfektionsLogik : MonoBehaviour
             if (kippwinkel > kippWinkelThreshold)
             {
                 wurdeGedreht = true;
+
                 if (spruehSound != null && audioSource != null)
                     audioSource.PlayOneShot(spruehSound);
 
-                Debug.Log("Flasche gekippt – Hände gelten als desinfiziert.");
+                Debug.Log("Flasche wurde gekippt.");
             }
         }
 
-        // Snapping erst NACH dem Drehen UND wenn sie wieder aufrecht UND nah am Tisch ist
         if (wurdeGedreht && !wurdeAbgestellt)
         {
             float distanz = Vector3.Distance(transform.position, abstellPosition.position);
@@ -53,36 +56,35 @@ public class DesinfektionsLogik : MonoBehaviour
             {
                 wurdeAbgestellt = true;
 
-                // Loslassen aus der Hand
+                // Flasche loslassen (falls gehalten)
                 if (grabInteractable.isSelected && grabInteractable.firstInteractorSelecting != null)
                 {
                     grabInteractable.interactionManager.SelectExit(grabInteractable.firstInteractorSelecting, grabInteractable);
                 }
 
-                // Snappen
+                // Position & Rotation exakt snappen
                 transform.position = abstellPosition.position;
                 transform.rotation = abstellPosition.rotation;
 
-                // Optional fixieren
+                // Flasche fixieren
                 grabInteractable.enabled = false;
                 rb.isKinematic = true;
 
-                // Ton abspielen
+                // Sound abspielen
                 if (abgestelltSound != null && audioSource != null)
                     audioSource.PlayOneShot(abgestelltSound);
 
                 Debug.Log("Flasche korrekt abgestellt.");
 
-                // 🟢 Alle restlichen Objekte interaktiv machen
-                VRIntroManager manager = FindObjectOfType<VRIntroManager>();
-                if (manager != null)
+                // 🟢 Aufgaben-UI starten
+                if (aufgabenManager != null)
                 {
-                    manager.AktiviereInteraktiveObjekte();
-                    Debug.Log("Interaktive Objekte aktiviert.");
+                    aufgabenManager.StarteNaechsteAufgabe(); // Diese Methode musst du ggf. noch in deinem Aufgabenmanager definieren
+                    Debug.Log("Nächste Aufgabe gestartet.");
                 }
                 else
                 {
-                    Debug.LogWarning("VRIntroManager nicht gefunden.");
+                    Debug.LogWarning("AufgabenUIManager nicht zugewiesen!");
                 }
             }
         }
