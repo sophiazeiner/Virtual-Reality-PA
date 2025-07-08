@@ -15,7 +15,7 @@ public class AufgabenUIManager : MonoBehaviour
 
     void Start()
     {
-        // Alle Canvas ausblenden, außer der erste
+        // Alle Canvas ausblenden, außer das erste
         for (int i = 0; i < aufgabenCanvas.Count; i++)
         {
             SetCanvasGroupVisible(aufgabenCanvas[i], i == 0);
@@ -75,5 +75,11 @@ public class AufgabenUIManager : MonoBehaviour
         cg.interactable = visible;
         cg.blocksRaycasts = visible;
         cg.gameObject.SetActive(visible);
+    }
+
+    // Diese Methode wird extern aufgerufen, z. B. von deinem Desinfektionsmittel
+    public void StarteNaechsteAufgabe()
+    {
+        NächsteAufgabeStarten();
     }
 }
