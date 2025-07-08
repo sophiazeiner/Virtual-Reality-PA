@@ -5,87 +5,52 @@ public class DesinfektionsLogik : MonoBehaviour
 {
     [Header("Audio")]
     public AudioSource audioSource;
-    public AudioClip spruehSound;
-    public AudioClip abgestelltSound;
-
-    [Header("Abstellpunkt")]
-    public Transform abstellPosition;
-    public float abstellToleranz = 0.25f;
+    public AudioClip spruehSound;     // Wird beim Kippen abgespielt
+    public AudioClip abgestelltSound; // Wird beim Wiederaufstellen abgespielt
 
     [Header("Kippwinkel-Erkennung")]
-    public float kippWinkelThreshold = 90f; // Ab wann gilt: gekippt
-    public float aufrechtWinkelLimit = 45f; // Für "steht wieder gerade"
+    public float kippWinkelThreshold = 90f;  // Als "gekippt" erkannt
+    public float aufrechtLimit = 30f;        // Als "wieder aufrecht" erkannt
 
-    [Header("Aufgaben-Manager")]
-    public AufgabenUIManager aufgabenManager; // Dein UI-Manager, der die nächste Aufgabe startet
-
-    private Rigidbody rb;
     private XRGrabInteractable grabInteractable;
-
     private bool wurdeGedreht = false;
-    private bool wurdeAbgestellt = false;
+    private bool aktionAbgeschlossen = false;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         grabInteractable = GetComponent<XRGrabInteractable>();
     }
 
     void Update()
     {
-        if (!wurdeGedreht)
+        if (aktionAbgeschlossen || grabInteractable == null) return;
+
+        // Prüfen, ob mit einem Controller gehalten wird
+        if (grabInteractable.isSelected &&
+            grabInteractable.firstInteractorSelecting != null)
         {
-            float kippwinkel = Vector3.Angle(transform.up, Vector3.up);
-            if (kippwinkel > kippWinkelThreshold)
+            float winkel = Vector3.Angle(transform.up, Vector3.up);
+
+            // Schritt 1: Flasche wurde stark gekippt
+            if (!wurdeGedreht && winkel > kippWinkelThreshold)
             {
                 wurdeGedreht = true;
 
-                if (spruehSound != null && audioSource != null)
+                if (audioSource && spruehSound)
                     audioSource.PlayOneShot(spruehSound);
 
                 Debug.Log("Flasche wurde gekippt.");
             }
-        }
 
-        if (wurdeGedreht && !wurdeAbgestellt)
-        {
-            float distanz = Vector3.Distance(transform.position, abstellPosition.position);
-            float winkelZurVertikalen = Vector3.Angle(transform.up, Vector3.up);
-
-            if (distanz <= abstellToleranz && winkelZurVertikalen <= aufrechtWinkelLimit)
+            // Schritt 2: Flasche wieder aufrecht
+            else if (wurdeGedreht && winkel <= aufrechtLimit)
             {
-                wurdeAbgestellt = true;
+                aktionAbgeschlossen = true;
 
-                // Flasche loslassen (falls gehalten)
-                if (grabInteractable.isSelected && grabInteractable.firstInteractorSelecting != null)
-                {
-                    grabInteractable.interactionManager.SelectExit(grabInteractable.firstInteractorSelecting, grabInteractable);
-                }
-
-                // Position & Rotation exakt snappen
-                transform.position = abstellPosition.position;
-                transform.rotation = abstellPosition.rotation;
-
-                // Flasche fixieren
-                grabInteractable.enabled = false;
-                rb.isKinematic = true;
-
-                // Sound abspielen
-                if (abgestelltSound != null && audioSource != null)
+                if (audioSource && abgestelltSound)
                     audioSource.PlayOneShot(abgestelltSound);
 
-                Debug.Log("Flasche korrekt abgestellt.");
-
-                // 🟢 Aufgaben-UI starten
-                if (aufgabenManager != null)
-                {
-                    aufgabenManager.StarteNaechsteAufgabe(); // Diese Methode musst du ggf. noch in deinem Aufgabenmanager definieren
-                    Debug.Log("Nächste Aufgabe gestartet.");
-                }
-                else
-                {
-                    Debug.LogWarning("AufgabenUIManager nicht zugewiesen!");
-                }
+                Debug.Log("Flasche wurde zurückgestellt – Aktion abgeschlossen.");
             }
         }
     }
