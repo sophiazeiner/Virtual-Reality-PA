@@ -1066,8 +1066,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "HANDSCHUHE\nKlicke daf\xFCr auf die Handschuhe, die vor dir auf dem Tisch
-    liegen.\n\nVerhindert die \xDCbertragung eigener DNA auf Beweismittel"
+  m_text: "HANDSCHUHE\nKlicke auf die Handschuhe vor dir auf dem Tisch, um sie anzuziehen.\n\nVerhindert
+    die \xDCbertragung eigener DNA auf Beweismittel"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8ac1ed6123904112adeaf50e63c4731, type: 2}
   m_sharedMaterial: {fileID: 1693478669045529817, guid: c8ac1ed6123904112adeaf50e63c4731,
@@ -6555,6 +6555,62 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293481276}
   m_Mesh: {fileID: 4300004, guid: 013043932069e224e90b516d38cdab48, type: 3}
+--- !u!1 &295492714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 295492715}
+  - component: {fileID: 295492716}
+  m_Layer: 0
+  m_Name: UI_Manager_Aufgabe01&02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &295492715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295492714}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1341896039}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &295492716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295492714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c7f98d06d1d43cda04255d0f4c79a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textElemente:
+  - {fileID: 808225197}
+  - {fileID: 2008514559}
+  - {fileID: 1626947616}
+  - {fileID: 35156469}
+  - {fileID: 1376291780}
+  - {fileID: 2079043322}
+  - {fileID: 1444315828}
+  weiterButton: {fileID: 1625230951}
+  uiCanvasGroup: {fileID: 0}
+  audioSource: {fileID: 1192830629}
+  klickSound: {fileID: 8300000, guid: 55bafac7635ee46ce90b0f946c037b3b, type: 3}
 --- !u!1 &297449810
 GameObject:
   m_ObjectHideFlags: 0
@@ -8257,12 +8313,12 @@ GameObject:
   - component: {fileID: 380540749}
   - component: {fileID: 380540748}
   m_Layer: 0
-  m_Name: UI_AufgabeDesinfektion
+  m_Name: UI_Aufgabe_01&02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &380540747
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8271,7 +8327,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380540746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 24.76}
+  m_LocalPosition: {x: 0, y: 0, z: 22.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9539,6 +9595,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!225 &414594005
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414593998}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &414594007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414593998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e47d7e018654e0389c1e1321c6208c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: 93c0bf192f0ad412a9ab9beb73175d70, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: 0b81380c3d2324392991514641977f54, type: 2}
+  hoverSound: {fileID: 0}
 --- !u!1001 &430078835
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15968,9 +16051,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "AUFGABE 1 - H\xE4nde desinfizieren\n\nGreife mit deinem rechten Controller
-    die Desinfektionsflasche (links auf dem Schrank). Kippe die Flasche \xFCber deine
-    linke Hand und stelle sie danach wieder zur\xFCck auf den Tisch."
+  m_text: "AUFGABE 1\n\nGreife mit deinem rechten Controller die Desinfektionsflasche
+    (links auf dem Schrank), um dir deine H\xE4nde zu desinfizieren.\nKippe sie \xFCber
+    deine linke Hand und stelle sie anschlie\xDFend wieder auf den Tisch zur\xFCck."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8ac1ed6123904112adeaf50e63c4731, type: 2}
   m_sharedMaterial: {fileID: 1693478669045529817, guid: c8ac1ed6123904112adeaf50e63c4731,
@@ -16533,6 +16616,12 @@ Transform:
 --- !u!4 &843911468 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2058767513908994672, guid: 4fedbc191226c1146a147611e5fc67ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 448638416}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &843911469 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: -5168981721859194153, guid: 4fedbc191226c1146a147611e5fc67ac,
     type: 3}
   m_PrefabInstance: {fileID: 448638416}
   m_PrefabAsset: {fileID: 0}
@@ -17993,6 +18082,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 414594000}
+    - targetCorrespondingSourceObject: {fileID: -1546514617415973913, guid: 8cb59fe69498244adbd773fa992e8fc2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 414594005}
+    - targetCorrespondingSourceObject: {fileID: -1546514617415973913, guid: 8cb59fe69498244adbd773fa992e8fc2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 414594007}
     - targetCorrespondingSourceObject: {fileID: 2118435132251005865, guid: 8cb59fe69498244adbd773fa992e8fc2,
         type: 3}
       insertIndex: -1
@@ -20173,6 +20270,24 @@ MonoBehaviour:
   - {fileID: 364779658}
   - {fileID: 2061834233}
   - {fileID: 105730080}
+  interaktiveObjekte:
+  - objekt: {fileID: 1908373254}
+    collider: {fileID: 1908373260}
+    interaktionsKomponente: {fileID: 1908373263}
+  - objekt: {fileID: 908463058}
+    collider: {fileID: 908463063}
+    interaktionsKomponente: {fileID: 908463066}
+  - objekt: {fileID: 364779658}
+    collider: {fileID: 364779665}
+    interaktionsKomponente: {fileID: 364779663}
+  - objekt: {fileID: 2061834233}
+    collider: {fileID: 2061834240}
+    interaktionsKomponente: {fileID: 2061834238}
+  - objekt: {fileID: 105730080}
+    collider: {fileID: 843911469}
+    interaktionsKomponente: {fileID: 0}
+  desinfektionsObjekt: {fileID: 414593998}
+  aufgabenUI: {fileID: 380540748}
   audioSource: {fileID: 1192830629}
   clickSound: {fileID: 8300000, guid: 55bafac7635ee46ce90b0f946c037b3b, type: 3}
 --- !u!1 &1035728027
@@ -26573,6 +26688,7 @@ Transform:
   - {fileID: 1192830628}
   - {fileID: 1199057284}
   - {fileID: 1835005840}
+  - {fileID: 295492715}
   m_Father: {fileID: 797841163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1345295546
@@ -26826,8 +26942,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "WEI\xDFER OVERALL\nKlicke daf\xFCr auf den Overall, der vor dir auf dem
-    Tisch liegt.\n\nSch\xFCtzt Kleidung & verhindert die Abgabe von Textilfasern"
+  m_text: "WEI\xDFER OVERALL\nKlicke auf das Kleidungsst\xFCck vor dir auf dem Tisch,
+    um den Overall anzuziehen.\n\nSch\xFCtzt Kleidung & verhindert die Abgabe von
+    Textilfasern"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8ac1ed6123904112adeaf50e63c4731, type: 2}
   m_sharedMaterial: {fileID: 1693478669045529817, guid: c8ac1ed6123904112adeaf50e63c4731,
@@ -28548,8 +28665,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "SCHUTZSCHUHE\nZiehe daf\xFCr die Schuhe zu deinen F\xFC\xDFen, um sie
-    anzuziehen.\n\nVerhindert Verunreinigungen am Boden"
+  m_text: "SCHUTZSCHUHE\nZiehe die Schuhe an deine F\xFC\xDFe \u2013 sie werden automatisch
+    angezogen.\n\nVerhindert Verunreinigungen am Boden"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8ac1ed6123904112adeaf50e63c4731, type: 2}
   m_sharedMaterial: {fileID: 1693478669045529817, guid: c8ac1ed6123904112adeaf50e63c4731,
@@ -30989,7 +31106,7 @@ GameObject:
   - component: {fileID: 1626947619}
   - component: {fileID: 1626947618}
   m_Layer: 0
-  m_Name: "Ausr\xFCstung_01"
+  m_Name: Aufgabe_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31046,8 +31163,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ziehe folgende Ausr\xFCstung an, bevor du den Tatort betrittst, in dem
-    du auf das zugeh\xF6rige Element vor dir auf dem Tisch klickst"
+  m_text: "AUFGABE 2\n\nZiehe folgende Ausr\xFCstung an, bevor du den Tatort betrittst,
+    in dem du auf das zugeh\xF6rige Element vor dir auf dem Tisch klickst:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8ac1ed6123904112adeaf50e63c4731, type: 2}
   m_sharedMaterial: {fileID: 1693478669045529817, guid: c8ac1ed6123904112adeaf50e63c4731,
@@ -32609,7 +32726,7 @@ GameObject:
   - component: {fileID: 1678413623}
   - component: {fileID: 1678413625}
   m_Layer: 0
-  m_Name: UI_Hintergrund
+  m_Name: UI_Intro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41532,8 +41649,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "MUNDSCHUTZ\nZiehe daf\xFCr die Maske zu deinem Gesicht, um sie anzuziehen.\n\nVermeidet
-    das Einbringen von Speichelpartikeln durch Atmen oder Sprechen"
+  m_text: "MUNDSCHUTZ\nBewege die Maske nah an dein Gesicht, um sie auszusetzen \u2013
+    sie legt sich automatisch an.\n\nVermeidet das Einbringen von Speichelpartikeln
+    durch Atmen oder Sprechen"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8ac1ed6123904112adeaf50e63c4731, type: 2}
   m_sharedMaterial: {fileID: 1693478669045529817, guid: c8ac1ed6123904112adeaf50e63c4731,

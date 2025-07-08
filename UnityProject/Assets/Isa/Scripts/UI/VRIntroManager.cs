@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class InteraktivesObjekt
+{
+    public GameObject objekt;
+    public Collider collider;
+    public MonoBehaviour interaktionsKomponente; // z. B. XRGrabInteractable oder eigenes Script
+}
+
 public class VRIntroManager : MonoBehaviour
 {
     [Header("Texte mit CanvasGroup")]
@@ -13,8 +21,15 @@ public class VRIntroManager : MonoBehaviour
     public Button weiterButton;
     public Button loslegenButton;
 
-    [Header("Raum aktivieren nach Intro")]
+    [Header("Raumobjekte (später aktiv)")]
     public List<GameObject> raumObjekte = new List<GameObject>();
+
+    [Header("Interaktive Objekte (sichtbar, aber zunächst inaktiv)")]
+    public List<InteraktivesObjekt> interaktiveObjekte = new List<InteraktivesObjekt>();
+
+    [Header("Sofort nach Intro: Desinfektionsflasche + UI")]
+    public GameObject desinfektionsObjekt;
+    public CanvasGroup aufgabenUI;
 
     [Header("Click Sound")]
     public AudioSource audioSource;
@@ -35,6 +50,23 @@ public class VRIntroManager : MonoBehaviour
 
         if (introTexte.Count > 0)
             StartCoroutine(FadeCanvasGroup(introTexte[0], true));
+
+        // Aufgaben-UI unsichtbar
+        SetCanvasGroupVisible(aufgabenUI, false);
+
+        // Desinfektionsobjekt deaktivieren
+        if (desinfektionsObjekt != null)
+            desinfektionsObjekt.SetActive(false);
+
+        // Interaktive Objekte sichtbar, aber interaktionslos machen
+        foreach (var entry in interaktiveObjekte)
+        {
+            if (entry.collider != null)
+                entry.collider.enabled = false;
+
+            if (entry.interaktionsKomponente != null)
+                entry.interaktionsKomponente.enabled = false;
+        }
 
         weiterButton.onClick.AddListener(() =>
         {
@@ -74,9 +106,31 @@ public class VRIntroManager : MonoBehaviour
         weiterButton.gameObject.SetActive(false);
         loslegenButton.gameObject.SetActive(false);
 
-        // Raumobjekte aktivieren
-        foreach (var obj in raumObjekte)
-            obj.SetActive(true);
+        // Nur Desinfektionsobjekt + Aufgaben-UI aktivieren
+        StartCoroutine(AktiviereDesinfektionUndAufgabe());
+    }
+
+    IEnumerator AktiviereDesinfektionUndAufgabe()
+    {
+        yield return new WaitForSeconds(2f);
+
+        if (desinfektionsObjekt != null)
+            desinfektionsObjekt.SetActive(true);
+
+        if (aufgabenUI != null)
+            yield return StartCoroutine(FadeCanvasGroup(aufgabenUI, true));
+    }
+
+    public void AktiviereInteraktiveObjekte()
+    {
+        foreach (var entry in interaktiveObjekte)
+        {
+            if (entry.collider != null)
+                entry.collider.enabled = true;
+
+            if (entry.interaktionsKomponente != null)
+                entry.interaktionsKomponente.enabled = true;
+        }
     }
 
     void SpieleClickSound()
