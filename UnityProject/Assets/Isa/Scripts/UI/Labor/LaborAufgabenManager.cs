@@ -14,11 +14,14 @@ public class LaborAufgabenManager : MonoBehaviour
     [Header("Click Sound")]
     public AudioSource clickSound;
 
+    [Header("Optional: Canvas Root zum Deaktivieren")]
+    public GameObject canvasRoot; // z. B. das ganze UI-Objekt
+
     private int currentIndex = 0;
 
     void Start()
     {
-        // Initial Setup: nur erster Text sichtbar, Zurück-Button aus
+        // Nur erster Text sichtbar, Zurück-Button aus
         for (int i = 0; i < textPanels.Count; i++)
             textPanels[i].SetActive(i == 0);
 
@@ -32,6 +35,13 @@ public class LaborAufgabenManager : MonoBehaviour
     {
         if (clickSound != null) clickSound.Play();
 
+        // Letztes Textfeld → alles ausblenden
+        if (currentIndex >= textPanels.Count - 1)
+        {
+            DeactivateAll();
+            return;
+        }
+
         textPanels[currentIndex].SetActive(false);
         currentIndex++;
 
@@ -43,6 +53,8 @@ public class LaborAufgabenManager : MonoBehaviour
     {
         if (clickSound != null) clickSound.Play();
 
+        if (currentIndex <= 0) return;
+
         textPanels[currentIndex].SetActive(false);
         currentIndex--;
 
@@ -52,10 +64,22 @@ public class LaborAufgabenManager : MonoBehaviour
 
     void UpdateButtonVisibility()
     {
-        // "Zurück" nur anzeigen, wenn wir nicht am ersten Text sind
         zurückButton.gameObject.SetActive(currentIndex > 0);
+        weiterButton.gameObject.SetActive(true); // immer sichtbar – bis zum letzten Klick
+    }
 
-        // "Weiter" nur anzeigen, wenn wir nicht am letzten Text sind
-        weiterButton.gameObject.SetActive(currentIndex < textPanels.Count - 1);
+    void DeactivateAll()
+    {
+        // Textfelder ausblenden
+        foreach (var panel in textPanels)
+            panel.SetActive(false);
+
+        // Buttons deaktivieren
+        weiterButton.gameObject.SetActive(false);
+        zurückButton.gameObject.SetActive(false);
+
+        // Optional: gesamtes Canvas ausblenden
+        if (canvasRoot != null)
+            canvasRoot.SetActive(false);
     }
 }
